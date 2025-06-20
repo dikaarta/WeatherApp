@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Weather App";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">Weather Information</h3>
+                </div>
+                <div class="card-body">
+                    <form id="weatherForm">
+                        <div class="mb-3">
+                            <label for="countrySelect" class="form-label">Select Country:</label>
+                            <select id="countrySelect" class="form-select" disabled>
+                                <option value="">Loading countries...</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="citySelect" class="form-label">Select City:</label>
+                            <select id="citySelect" class="form-select" disabled>
+                                <option value="">Select a country first</option>
+                            </select>
+                        </div>
+
+                        <div id="loadingSpinner" class="text-center" style="display: none;">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p>Loading weather data...</p>
+                        </div>
+
+                        <div id="weatherResult" class="mt-4" style="display: none;">
+                            <div class="card bg-light">
+                                <div class="card-header">
+                                    <h5 id="weatherLocation" class="mb-0"></h5>
+                                    <small id="weatherTime" class="text-muted"></small>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>Temperature</h6>
+                                            <p class="mb-2">
+                                                <strong id="tempF"></strong> °F /
+                                                <strong id="tempC"></strong> °C
+                                            </p>
+
+                                            <h6>Conditions</h6>
+                                            <p id="skyConditions" class="mb-2"></p>
+
+                                            <h6>Wind</h6>
+                                            <p class="mb-2">
+                                                <span id="windSpeed"></span> mph <span id="windDirection"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6>Humidity</h6>
+                                            <p id="humidity" class="mb-2"></p>
+
+                                            <h6>Pressure</h6>
+                                            <p id="pressure" class="mb-2"></p>
+
+                                            <h6>Visibility</h6>
+                                            <p id="visibility" class="mb-2"></p>
+
+                                            <h6>Dew Point</h6>
+                                            <p id="dewPoint" class="mb-2"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/weather.js"></script>
+}
