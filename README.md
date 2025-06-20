@@ -88,31 +88,32 @@ dotnet test WeatherApp.Tests
 
 ```
 WeatherApp/
-├── WeatherApp/                    # Main web application
-│   ├── Controllers/              # MVC Controllers and API endpoints
-│   │   ├── ApiController.cs      # REST API endpoints
-│   │   └── HomeController.cs     # Main page controller
-│   ├── Models/                   # Data models and DTOs
-│   │   └── WeatherModels.cs      # Weather, Country, and City models
-│   ├── Services/                 # Business logic services
-│   │   ├── IWeatherService.cs    # Weather service interface
-│   │   ├── WeatherService.cs     # Weather service implementation
-│   │   ├── ICountryService.cs    # Country service interface
-│   │   └── CountryService.cs     # Country service implementation
-│   ├── Views/                    # Razor views
+├── WeatherApp/                     # Main web application
+│   ├── Controllers/                # MVC Controllers and API endpoints
+│   │   ├── CountriesController.cs  # Countries API endpoints
+│   │   ├── WeatherController       # Weather API endpoints
+│   │   └── HomeController.cs       # Main page controller
+│   ├── Models/                     # Data models and DTOs
+│   │   └── WeatherModels.cs        # Weather, Country, and City models
+│   ├── Services/                   # Business logic services
+│   │   ├── IWeatherService.cs      # Weather service interface
+│   │   ├── WeatherService.cs       # Weather service implementation
+│   │   ├── ICountryService.cs      # Country service interface
+│   │   └── CountryService.cs       # Country service implementation
+│   ├── Views/                      # Razor views
 │   │   ├── Home/
-│   │   │   └── Index.cshtml      # Main page
+│   │   │   └── Index.cshtml        # Main page
 │   │   └── Shared/
-│   │       └── _Layout.cshtml    # Layout template
-│   ├── wwwroot/                  # Static files
+│   │       └── _Layout.cshtml      # Layout template
+│   ├── wwwroot/                    # Static files
 │   │   └── js/
-│   │       └── weather.js        # Frontend JavaScript
-│   ├── Program.cs                # Application startup
-│   └── appsettings.json          # Configuration
-├── WeatherApp.Tests/             # Unit tests
-│   ├── Controllers/              # Controller tests
-│   └── Services/                 # Service tests
-└── WeatherApp.sln               # Solution file
+│   │       └── weather.js          # Frontend JavaScript
+│   ├── Program.cs                  # Application startup
+│   └── appsettings.json            # Configuration
+├── WeatherApp.Tests/               # Unit tests
+│   ├── Controllers/                # Controller tests
+│   └── Services/                   # Service tests
+└── WeatherApp.sln                  # Solution file
 ```
 
 ## API Endpoints
@@ -173,70 +174,3 @@ Returns weather information for the specified city.
   "pressure": 1013.0
 }
 ```
-
-## Architecture & Design Decisions
-
-### Dependency Injection
-- All services are registered in the DI container
-- Interfaces are used for loose coupling and testability
-- HttpClient is injected for external API calls
-
-### Service Layer
-- **WeatherService**: Handles weather API integration with fallback to mock data
-- **CountryService**: Manages country and city data (currently in-memory)
-- Temperature conversion logic is centralized and unit tested
-
-### Error Handling
-- Graceful degradation when external APIs are unavailable
-- Comprehensive error handling in controllers
-- User-friendly error messages in the UI
-
-### Testing Strategy
-- Unit tests cover core business logic
-- Controllers are tested with mocked services
-- Temperature conversion logic has comprehensive test coverage
-- All external dependencies are mocked for offline testing
-
-## Assumptions & Design Choices
-
-1. **Mock Data**: Countries and cities are stored in-memory for simplicity
-2. **Weather Fallback**: Application gracefully falls back to mock weather data
-3. **Temperature Priority**: External API returns Fahrenheit; conversion to Celsius happens in service layer
-4. **Error Handling**: Failed API calls return mock data rather than errors to improve user experience
-5. **UI Framework**: Bootstrap 5 chosen for responsive, modern UI without additional complexity
-
-## Future Enhancements
-
-- Database integration for countries and cities
-- User preferences and favorites
-- Weather forecasts and historical data
-- Caching for improved performance
-- Authentication and user accounts
-- Mobile app version
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Port Already in Use**: Change ports in `Properties/launchSettings.json`
-2. **API Key Issues**: Ensure your OpenWeatherMap API key is valid and active
-3. **Build Errors**: Ensure .NET 8.0 SDK is installed
-4. **Test Failures**: Run `dotnet clean` and `dotnet restore` before rebuilding
-
-### Logs
-Application logs are written to the console. Set log level in `appsettings.json`:
-
-```json
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "WeatherApp": "Debug"
-    }
-  }
-}
-```
-
-## License
-
-This project is for educational/demonstration purposes.
